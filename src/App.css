@@ -1,38 +1,471 @@
-.App {
-  text-align: center;
+/* Global Fixes */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #a239ca, #3b82f6);
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+/* 🔹 Prevent Content from Pushing the Menu */
+.app-container {
+  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  background: linear-gradient(to bottom, #a239ca, #3b82f6);
+  position: relative;
+}
+
+/* Ensure elements don't have unexpected spacing issues */
+* {
+  box-sizing: border-box;
+}
+
+/* Fix Wavy Effect (Disabled for Mobile) */
+.app-container::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  /* background: white; */
+  clip-path: path(
+    "M0,100 C150,200 350,0 500,100 C650,200 850,0 1000,100 L1000,200 L0,200 Z"
+  );
+}
+
+.no-wavy-effect::before {
+  display: none;
+}
+
+/* Main Form Styling */
+.confession-form-wrapper {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 480px;
+  width: 100%;
+  margin: 20px auto;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.white-text {
+  color: #fff;
+}
+
+/* Logo Inside Form */
+.confession-form-image-placeholder {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-bottom: 8px;
+}
+
+.confession-form-image-placeholder img {
+  max-width: 80px;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Make the Form Inputs More Touch-Friendly */
+input,
+select,
+textarea {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 12px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Improve Button Usability */
+.button2 {
+  background-color: #bc13fe;
+  width: 100%;
+  border: none;
   color: white;
+  margin-top: 10px;
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.4s ease;
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.button2:hover {
+  background-color: #9b0edd;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.centerText {
+  text-align: center;
+}
+
+/* Adjust Margins */
+.marginMinusTen {
+  margin-top: -10px;
+}
+
+.marginMinusthirdteen {
+  margin-top: -13px;
+}
+
+/* 🔹 Prevent Background Scrolling When Menu is Open */
+.no-scroll {
+  overflow: hidden;
+}
+
+.hamburger-menu {
+  position: fixed; /* ✅ Keeps it in normal flow */
+  top: 0;
+  left: 0;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  padding: 15px 20px;
+  background: none; /* ✅ Remove background */
+  z-index: 1001;
+}
+
+/* 🔹 Ensure Overlay Covers Entire Screen */
+.overlay-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* 🔹 Close Button (X) in Top Right */
+.close-menu {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  z-index: 1002; /* Keep above everything */
+}
+
+/* 🔹 Menu List */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.menu-list li {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  margin: 15px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between emoji and text */
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* 🔹 Adjust Form Spacing */
+.newsletter-form,
+.confession-form-wrapper {
+  margin-top: 20px; /* ✅ Keeps everything below naturally */
+}
+/* 🔹 Ensure Newsletter Form is Centered */
+.newsletter-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  z-index: 999;
+}
+
+.newsletter-subtext {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Checkbox Styling */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.checkbox-container input {
+  width: 18px;
+  height: 18px;
+}
+
+/* Email Input */
+.email-label {
+  display: block;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+.email-label input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Hover Effect */
+.menu-list li:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Meme Form */
+.meme-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+}
+
+/* Meme Labels */
+.meme-label {
+  display: block;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+/* Text Input */
+.meme-label textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+/* File Input */
+.meme-label input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+/* Meme Preview */
+.meme-preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.meme-preview img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Submit Button */
+.button2 {
+  background-color: #bc13fe;
+  width: 100%;
+  border: none;
+  color: white;
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button2:hover {
+  background-color: #9b0edd;
+}
+
+/* News Form */
+.news-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+}
+
+/* News Labels */
+.news-label {
+  display: block;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+/* Text Input */
+.news-label textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+/* File Input */
+.news-label input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+/* Multiple Media Preview */
+.news-preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.preview-item {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.preview-item img,
+.preview-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Delete Media Button */
+.delete-media {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 50%;
+}
+
+.delete-media:hover {
+  background: red;
+}
+
+.partnership-form {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.partnership-subtext {
+  font-size: 14px;
+  text-align: center;
+  color: gray;
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.success-message {
+  text-align: center;
+  font-size: 16px;
+  color: green;
+  font-weight: bold;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.clickable-link {
+  cursor: pointer;
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.clickable-link:hover {
+  color: #ffd700; /* or any hover color you want */
+}
+
+/* 🔹 Mobile-Friendly Adjustments */
+@media (max-width: 768px) {
+  .menu-list li {
+    font-size: 20px;
   }
 }

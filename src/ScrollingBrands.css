@@ -1,0 +1,59 @@
+.scrolling-container {
+  width: 100%;
+  overflow: hidden;
+  background: transparent;
+  /* padding: 20px 0; */
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.scrolling-wrapper {
+  display: flex;
+  gap: 40px; /* Space between items */
+  min-width: 100vw;
+}
+
+.brand-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px; /* Ensures items stay side-by-side */
+  opacity: 0.8;
+}
+
+.brand-item img {
+  height: 100px;
+  width: auto;
+}
+
+.fade-left,
+.fade-right {
+  position: absolute;
+  top: 0;
+  width: 15%; /* Adjust as needed */
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  background-blend-mode: screen; /* Helps blend the gradient better */
+}
+
+/* Left Fade - Softens and blends better */
+.fade-left {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(162, 57, 202, 0.8),
+    rgba(162, 57, 202, 0)
+  );
+}
+
+/* Right Fade - Softens and blends better */
+.fade-right {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(59, 130, 246, 0.8),
+    rgba(59, 130, 246, 0)
+  );
+}
