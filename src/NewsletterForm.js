@@ -37,6 +37,8 @@ const classifications = [
   "Other",
 ];
 
+const ageRanges = ["18-20", "21-23", "24+"];
+
 const NewsletterForm = () => {
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState("");
@@ -47,6 +49,8 @@ const NewsletterForm = () => {
   const [selectedClassification, setSelectedClassification] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const [selectedAgeRange, setSelectedAgeRange] = useState(""); // ⭐ ADDED
 
   const options = [
     "📢 Job Opportunities (Brand Ambassador, Internships, etc)",
@@ -64,6 +68,7 @@ const NewsletterForm = () => {
       OPTIONS: selectedOptions.join(", "),
       MAJOR: selectedMajor || "N/A",
       CLASSIFICATION: selectedClassification || "N/A",
+      AGE_RANGE: selectedAgeRange || "N/A", // ⭐ ADDED: include age in payload
       INSTAGRAM: instagramHandle || "N/A",
     };
 
@@ -81,6 +86,7 @@ const NewsletterForm = () => {
         setSelectedOptions([]);
         setSelectedMajor("");
         setSelectedClassification("");
+        setSelectedAgeRange("");
         setStep(1);
         setErrorMessage("");
       } else {
@@ -107,7 +113,12 @@ const NewsletterForm = () => {
   const canAdvance = () => {
     if (step === 1) return selectedOptions.length > 0;
     if (step === 2)
-      return selectedMajor && selectedClassification && selectedSchool;
+      return (
+        selectedMajor &&
+        selectedClassification &&
+        selectedSchool &&
+        selectedAgeRange
+      );
     return true;
   };
 
@@ -178,6 +189,23 @@ const NewsletterForm = () => {
                 ))}
               </select>
             </label>
+
+            {/* ⭐ ADDED: Age range dropdown */}
+            <label className="email-label">
+              Select Your Age Range: {/* ⭐ ADDED */}
+              <select
+                value={selectedAgeRange}
+                onChange={(e) => setSelectedAgeRange(e.target.value)}
+              >
+                <option value="">-- Choose Your Age Range --</option>
+                {ageRanges.map((range, index) => (
+                  <option key={index} value={range}>
+                    {range}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {/* ⭐ ADDED END */}
 
             <label className="email-label">
               School Name:

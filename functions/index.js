@@ -14,12 +14,26 @@ exports.subscribeToNewsletter = onRequest(
         return res.status(405).send("Method Not Allowed");
       }
 
-      const {email, SCHOOL, OPTIONS, MAJOR, CLASSIFICATION, INSTAGRAM} =
-      req.body;
+      const {
+        email,
+        SCHOOL,
+        OPTIONS,
+        MAJOR,
+        CLASSIFICATION,
+        INSTAGRAM,
+        AGE_RANGE,
+      } = req.body;
 
       const data = {
         email,
-        attributes: {SCHOOL, OPTIONS, MAJOR, CLASSIFICATION, INSTAGRAM},
+        attributes: {
+          SCHOOL,
+          OPTIONS,
+          MAJOR,
+          CLASSIFICATION,
+          INSTAGRAM,
+          AGE_RANGE,
+        },
         listIds: [4],
         updateEnabled: true,
       };
