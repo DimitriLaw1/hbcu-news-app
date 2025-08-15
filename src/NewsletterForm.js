@@ -210,7 +210,7 @@ const NewsletterForm = () => {
             </label>
 
             <label className="email-label">
-              Instagram Username:
+              Instagram Username or N/A:
               <input
                 type="text"
                 value={instagramHandle}
