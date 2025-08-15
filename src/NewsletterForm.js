@@ -34,6 +34,7 @@ const classifications = [
   "Senior",
   "Graduate Student",
   "Alumni",
+  "Other",
 ];
 
 const NewsletterForm = () => {
