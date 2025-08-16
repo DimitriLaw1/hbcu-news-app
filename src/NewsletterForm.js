@@ -37,7 +37,7 @@ const classifications = [
   "Other",
 ];
 
-const ageRanges = ["18-20", "21-23", "24+"];
+const ageRanges = ["17-20", "21-23", "24+"];
 
 const NewsletterForm = () => {
   const [step, setStep] = useState(1);
